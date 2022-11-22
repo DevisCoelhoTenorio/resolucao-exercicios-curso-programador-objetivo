@@ -1,10 +1,10 @@
-import { userProducts, users} from './dataBase';
+import { users } from './dataBase';
 import IUser from './interfaces/IUser';
 import IImc from './interfaces/IImc';
 
 
 const USER_NOT_FOUND = 'User not found';
-class User {
+export default class User {
   private _userList: IUser[];
 
   constructor() {
@@ -77,7 +77,7 @@ class User {
   public listBelowAverageHeight(): IUser[] {
     const avarageHeight = Number(this.averageHeight());
     return this._userList.filter((user) => user.height < avarageHeight);
-  };
+  }; 
 };
 
 const service = new User();
@@ -99,4 +99,5 @@ console.log('Req 07', service.listName());
 console.log('Req 08', service.averageHeight());
 // Req 09
 console.log('Req 09', service.listBelowAverageHeight());
+
 
