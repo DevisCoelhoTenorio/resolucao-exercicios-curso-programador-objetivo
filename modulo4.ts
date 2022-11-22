@@ -71,7 +71,7 @@ class User {
   };
   // 8. Calcular a média de altura de todos os usuários;
   public averageHeight() {
-    return (this._userList.reduce((acc, crr) => acc += crr.height ,0)) / this._userList.length
+    return ((this._userList.reduce((acc, crr) => acc += crr.height ,0)) / this._userList.length).toFixed(2)
   }
 }
 
@@ -91,4 +91,5 @@ console.log('Req 06', service.listUserByImc());
 // Req 07
 console.log(service.listName());
 // Req 08
+console.log(service.averageHeight());
 
