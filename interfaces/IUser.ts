@@ -10,4 +10,4 @@ export default interface IUser {
     salary: number;
     married: boolean;
     active: boolean;
-}
+};
