@@ -34,3 +34,22 @@ function ehMaior(a, b) {
 function ehMaiorNoIf(a, b) {
     return a > b ? true : false;
 };
+
+// 6. Crie uma função que retorna um preço após aplicado um desconto de 10%
+// ex: precoComDesconto(10) => 9
+
+function precoComDesconto(a) {
+    return a - ((a * 10) / 100);
+};
+
+// 7. Crie uma função que retorna um preço após aplicado um desconto de n%
+
+function precoComDescontoN(a, n) {
+    return a - ((a * n) /100);
+};
+
+// 8. Crie uma função que classifica uma idade em jovem, meia-idade e idoso
+// jovens são aqueles que possuem até 39 anos;
+// meia-idade são os que estão entre 40 e 60 anos;
+// idosos são os que posssuem mais de 60 anos;
+// ex: classificaIdade(60) => "meia-idade"
