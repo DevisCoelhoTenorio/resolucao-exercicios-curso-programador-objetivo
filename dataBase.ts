@@ -1,4 +1,6 @@
-export const users = [
+import IUser from "./interfaces/IUser";
+
+export const users: IUser[] = [
     {
       id: 1,
       city: "São Paulo",
