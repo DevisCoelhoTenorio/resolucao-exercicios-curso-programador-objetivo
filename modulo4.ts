@@ -11,20 +11,31 @@ class User {
   }
 
   // 1. Encontrar um usuário pelo nome;
-  public findByName(name: string) {
+  public findByName(name: string): IUser | string {
     return this._userList.find((user) => user.name === name) || USER_NOT_FOUND;
   }
 
   // 2. Encontrar um usuário pelo valor de uma propriedade qualquer;
   // Dica: a assinatura do método é findUserByPropValue(users, prop, value)
-  public findUserByPropValue<T>(prop: string, value: T) {
+  public findUserByPropValue<T>(prop: string, value: T): IUser | string {
     return this._userList.find((user) => user[prop] === value) || USER_NOT_FOUND;
   }
 
   // 3. Encontrar a usuária do sexo feminino com o salário maior.
-  
+  public findUserByMaxSalary(): IUser {
+    const list: IUser[] = [... this._userList];
+    list.sort((a, b) => {
+      if(b.salary > a.salary ) return 1
+      else return -1
+    })
+    return list[0]
+  }
 }
 
 const service = new User();
-console.log(service.findByName('josé da silva')) // Req 01
-console.log(service.findUserByPropValue<string>('city', 'Rio de Janeiro'))
+// Req 01
+console.log('Req 01',service.findByName('josé da silva')) 
+// Req 02
+console.log('Req 02',service.findUserByPropValue<string>('city', 'Rio de Janeiro')) 
+// Req 03
+console.log('Req 03', service.findUserByMaxSalary())
