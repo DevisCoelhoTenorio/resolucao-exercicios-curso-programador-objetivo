@@ -23,12 +23,18 @@ class User {
 
   // 3. Encontrar a usuária do sexo feminino com o salário maior.
   public findUserByMaxSalary(): IUser {
-    const list: IUser[] = [... this._userList];
+    const list: IUser[] = [...this._userList];
     list.sort((a, b) => {
-      if(b.salary > a.salary ) return 1
-      else return -1
+      if(b.salary <= a.salary ) return -1
+      else return 1
     })
     return list[0]
+  }
+  // 4. Encontre os usuários de um dado estado e com peso maior
+  // que um dado peso;
+  public findByMaxWeightAndCity(weight: number, city: string): IUser[] {
+    const userMap = this._userList.filter((user)=> user.city === city && user.weight > weight)
+    return userMap;
   }
 }
 
@@ -39,3 +45,6 @@ console.log('Req 01',service.findByName('josé da silva'))
 console.log('Req 02',service.findUserByPropValue<string>('city', 'Rio de Janeiro')) 
 // Req 03
 console.log('Req 03', service.findUserByMaxSalary())
+// Req 04
+console.log('Req 04', service.findByMaxWeightAndCity(70, 'São Paulo'))
+// Req 05
