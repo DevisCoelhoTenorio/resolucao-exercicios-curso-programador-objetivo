@@ -70,10 +70,15 @@ class User {
     return this._userList.map((user) => this.capitalizeText(user.name))
   };
   // 8. Calcular a média de altura de todos os usuários;
-  public averageHeight() {
+  public averageHeight(): string {
     return ((this._userList.reduce((acc, crr) => acc += crr.height ,0)) / this._userList.length).toFixed(2)
-  }
-}
+  };
+  // 9. Retornar os usuários com altura abaixo da média;
+  public listBelowAverageHeight(): IUser[] {
+    const avarageHeight = Number(this.averageHeight());
+    return this._userList.filter((user) => user.height < avarageHeight);
+  };
+};
 
 const service = new User();
 // Req 01
@@ -89,7 +94,9 @@ console.log('Req 05', service.findByStateOrMarried('São Paulo'))
 // Req 06
 console.log('Req 06', service.listUserByImc());
 // Req 07
-console.log(service.listName());
+console.log('Req 07', service.listName());
 // Req 08
-console.log(service.averageHeight());
+console.log('Req 08', service.averageHeight());
+// Req 09
+console.log('Req 09', service.listBelowAverageHeight());
 
