@@ -1,0 +1,26 @@
+{
+  "name": "resolucao-exercicios-curso-programador-objetivo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dataBase.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevisCoelhoTenorio/resolucao-exercicios-curso-programador-objetivo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevisCoelhoTenorio/resolucao-exercicios-curso-programador-objetivo/issues"
+  },
+  "homepage": "https://github.com/DevisCoelhoTenorio/resolucao-exercicios-curso-programador-objetivo#readme",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.3"
+  },
+  "dependencies": {
+    "typescript": "^4.9.3"
+  }
+}
