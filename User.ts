@@ -78,6 +78,25 @@ export default class User {
     const avarageHeight = Number(this.averageHeight());
     return this._userList.filter((user) => user.height < avarageHeight);
   }; 
+  // 13. Retornar a lista de usuários sem o usuário mais novo da lista.
+  public excludeYoungestFromList(): IUser[] {
+    const list = [...this._userList];
+    list.sort((a, b) => b.age - a.age).pop();
+    return list;
+  };
+  // 14. Retornar um objeto que mapeia usuários pelo próprio
+  // id do usuário.
+  public listUserMapForId(): Record<string, IUser> {
+    const userMap: Record<string, IUser> = {};
+    this._userList.forEach((user) => userMap[user.id] = user)
+    return userMap;
+  };
+  // 15. Contar a quantidade de usuários de uma dada cidade;
+  public countUserByCity(city: string): number {
+    let count: number = 0;
+    this._userList.forEach((user) => user.city === city ? count += 1 : null)
+    return count;
+  }
 };
 
 const service = new User();
@@ -99,5 +118,11 @@ console.log('Req 07', service.listName());
 console.log('Req 08', service.averageHeight());
 // Req 09
 console.log('Req 09', service.listBelowAverageHeight());
+// Req 13
+console.log('Req 13', service.excludeYoungestFromList());
+// Req 14
+console.log('Req 14', service.listUserMapForId());
+// Req 15
+console.log('Req 15', service.countUserByCity('São Paulo'));
 
 
