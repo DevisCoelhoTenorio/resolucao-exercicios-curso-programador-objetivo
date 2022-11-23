@@ -1,4 +1,4 @@
-import { users } from './dataBase';
+import { users, newUsers } from './dataBase';
 import IUser from './interfaces/IUser';
 import ProductService from './Product';
 // import IProduct from './interfaces/IProduct';
@@ -176,12 +176,28 @@ export default class User {
   // Dois usuários são idênticos, se tiverem o mesmo id;
   // ex: lista1=[{id:2}, {id:3}] e lista2=[{id:3},{id:4}]
   // usuariosComuns => [{id:3}]
-  // public findSimilarUsers(newUserList: IUser[]): IUser[] {
-  //   const similarList: IUser[] = [];
-  //   this._userList.forEach((user) => {
-  //     if (newUserList[])
-  //   });
-  // };
+  public findSimilarUsers(newUserList: IUser[]): IUser[] {
+    const comparisonList: Record<number, IUser> = {};
+    const filterList: Record<number, IUser> = {};
+    const fullList = [...this._userList, ...newUserList];
+    fullList.forEach((user) => {
+      if (comparisonList[user.id]) filterList[user.id] = user;
+      else comparisonList[user.id] = user;
+    });
+    return Object.values(filterList);
+  };
+  // 25. Encontre os usuários não-comuns a duas listas de usuários.
+  // ex: lista1=[{id:2}, {id:3}] e lista2=[{id:3},{id:4}]
+  // usuariosNaoComuns => [{id:2}, {id:4}]
+  public findNoSimilarUsers(newUserList: IUser[]): IUser[] {
+    const filterList: Record<number, IUser> = {};
+    const fullList = [...this._userList, ...newUserList];
+    fullList.forEach((user) => {
+      if (filterList[user.id]) delete filterList[user.id];
+      else filterList[user.id] = user;
+    });
+    return Object.values(filterList);
+  };
 };
 const productService = new ProductService();
 const service = new User(productService);
@@ -223,5 +239,9 @@ console.log('Req 21', service.findLeastSpentUser());
 console.log('Req 22', service.findUserIdByBoughtLess());
 // Req 23
 console.log('Req 23', service.getUsersByBought()); 
+// Req 24
+console.log('Req 24', service.findSimilarUsers(newUsers));
+// Req 25
+console.log('Req 25', service.findNoSimilarUsers(newUsers));
 
 
