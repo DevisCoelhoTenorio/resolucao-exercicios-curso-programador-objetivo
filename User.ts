@@ -150,11 +150,38 @@ export default class User {
     return selectedUSers;
   };
   // 21. Encontre o userId que menos gastou;
-  public findLeastSpentUser() {
+  public findLeastSpentUser(): string {
     const listUserBySpending = Object.entries(this._productService.listUserMapBySpending());
-    listUserBySpending.sort((a, b) => a[1] - b[1])
+    listUserBySpending.sort((a, b) => a[1] - b[1]);
     return listUserBySpending[0][0];
   };
+  // 22. Encontre o userId que comprou menos produtos, mas
+  // que comprou sim algum produto;
+  public findUserIdByBoughtLess(): string {
+    const listUserByBoughtLess = Object.entries(this._productService.listUserMapByAmountPurchases());
+    listUserByBoughtLess.sort((a, b) => a[1] - b[1]);
+    return listUserByBoughtLess[0][0];
+  };
+  // 23. Encontre os usuários (objetos completos)
+  // que compraram algum produto;
+  public getUsersByBought(): IUser[] {
+    const listUserByBought = this._productService.listUserMapByAmountPurchases();
+    const userBoughtMap: IUser[] = [];
+    this._userList.forEach((user) => {
+      if (listUserByBought[user.id]) userBoughtMap.push(user);
+    });
+    return userBoughtMap;
+  };
+  // 24. Encontre os usuários comuns a duas listas de usuários.
+  // Dois usuários são idênticos, se tiverem o mesmo id;
+  // ex: lista1=[{id:2}, {id:3}] e lista2=[{id:3},{id:4}]
+  // usuariosComuns => [{id:3}]
+  // public findSimilarUsers(newUserList: IUser[]): IUser[] {
+  //   const similarList: IUser[] = [];
+  //   this._userList.forEach((user) => {
+  //     if (newUserList[])
+  //   });
+  // };
 };
 const productService = new ProductService();
 const service = new User(productService);
@@ -192,5 +219,9 @@ console.log('Req 18', service.averageSalaryByCity());
 console.log('Req 20', service.listUserByAboveAverage());
 // Req 21
 console.log('Req 21', service.findLeastSpentUser());
+// Req 22
+console.log('Req 22', service.findUserIdByBoughtLess());
+// Req 23
+console.log('Req 23', service.getUsersByBought()); 
 
 

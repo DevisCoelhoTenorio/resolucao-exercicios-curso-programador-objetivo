@@ -59,12 +59,21 @@ export default class Product {
     return averagePrice;
   };
   public listUserMapBySpending(): Record<string, number> {
-    const userMapBySpending: Record<string, number>= {}
+    const userMapBySpending: Record<string, number>= {};
     this._productList.forEach((product) => {
       if (userMapBySpending[product.userId]) userMapBySpending[product.userId] += product.price;
       else userMapBySpending[product.userId] = product.price;
     });
     return userMapBySpending;
+  };
+  // Método auxiliar do Req 22;
+  public listUserMapByAmountPurchases() {
+    const userMapByAmountPurchases: Record<string, number>= {};
+    this._productList.forEach((product) => {
+      if (userMapByAmountPurchases[product.userId]) userMapByAmountPurchases[product.userId] += 1;
+      else userMapByAmountPurchases[product.userId] = 1;
+    });
+    return userMapByAmountPurchases;
   };
 };
 
