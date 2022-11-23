@@ -1,7 +1,6 @@
 import { users, newUsers } from '../data/dataBase';
 import IUser from '../interfaces/IUser';
 import ProductService from './Product';
-import IImc from '../interfaces/IImc';
 
 // Obs: Para rodar os Logs de teste basta digitar o comando
 // ts-node ./resolucao-modulo-4/class/User.ts na raiz do projeto.
@@ -53,8 +52,8 @@ export default class User {
   // 6. Cria uma função que recebe a lista de usuários e retorna
   // uma lista com o IMC dos respectivos usuários;
   // OBS: imc = peso/(altura x altura)
-  public listUserByImc(): IImc[] {
-    const userMap = this._userList.map((user) => (
+  public listUserByImc(): Record<string, string>[] {
+    const userMap: Record<string, string>[] = this._userList.map((user) => (
       {
       [user.name]: (user.weight/(user.height * user.height)).toFixed(2),
       }
