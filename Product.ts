@@ -1,7 +1,7 @@
 import { userProducts } from './dataBase';
 import IProduct from './interfaces/IProduct';
 
-class Product {
+export default class Product {
   private _productList: IProduct[];
 
   constructor(){
@@ -39,13 +39,32 @@ class Product {
     });
     return check;
   };
+  // Método auxiliar para Req 19 e 20
+  public getDifferentProduct(): Record<string, IProduct> {
+    const differentProductMap: Record<string, IProduct> = {};
+    this._productList.forEach((product) => {
+      if (!differentProductMap[product.name]) differentProductMap[product.name] = product;
+    });
+    return differentProductMap;
+  };
   // 19. Obter os nomes distintos de produtos;
   public getDifferentNameProduct(): Array<string> {
-    const nameProductMap: Record<string, number> = {};
+    const differentNames = Object.keys(this.getDifferentProduct());
+    return differentNames;
+  };
+  // Método auxiliar do Req 20;
+  public averagePriceProducts(): number {
+    const differentProducts = Object.values(this.getDifferentProduct());
+    const averagePrice = (differentProducts.reduce((acc, crr) => acc += crr.price ,0)) / differentProducts.length;
+    return averagePrice;
+  };
+  public listUserMapBySpending(): Record<string, number> {
+    const userMapBySpending: Record<string, number>= {}
     this._productList.forEach((product) => {
-      if (!nameProductMap[product.name]) nameProductMap[product.name] = product.id;
+      if (userMapBySpending[product.userId]) userMapBySpending[product.userId] += product.price;
+      else userMapBySpending[product.userId] = product.price;
     });
-    return Object.keys(nameProductMap);
+    return userMapBySpending;
   };
 };
 

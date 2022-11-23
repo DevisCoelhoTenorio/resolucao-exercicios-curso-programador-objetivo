@@ -1,14 +1,18 @@
 import { users } from './dataBase';
 import IUser from './interfaces/IUser';
+import ProductService from './Product';
+// import IProduct from './interfaces/IProduct';
 import IImc from './interfaces/IImc';
 
 
 const USER_NOT_FOUND = 'User not found';
 export default class User {
   private _userList: IUser[];
+  private _productService: ProductService;
 
-  constructor() {
+  constructor(productService: ProductService) {
     this._userList = users;
+    this._productService = productService;
   };
 
   // 1. Encontrar um usuário pelo nome;
@@ -134,9 +138,20 @@ export default class User {
     });
     return responseObj;
   };
+  // 20. Retornar os usuários que gastaram mais que preço
+  // médio dos produtos vendidos;
+  public listUserByAboveAverage(): IUser[] {
+    const averagePrice = this._productService.averagePriceProducts();
+    const listUserBySpending = this._productService.listUserMapBySpending();
+    const selectedUSers: IUser[] = [];
+    this._userList.forEach((user) => {
+      if (listUserBySpending[user.id] && listUserBySpending[user.id] > averagePrice) selectedUSers.push(user);
+    });
+    return selectedUSers;
+  };
 };
-
-const service = new User();
+const productService = new ProductService();
+const service = new User(productService);
 // Req 01
 console.log('Req 01', service.findByName('josé da silva')) 
 // Req 02
@@ -167,5 +182,7 @@ console.log('Req 16', service.groupByCity());
 console.log('Req 17', service.countUserByCity());
 // Req 18
 console.log('Req 18', service.averageSalaryByCity());
+// Req 20
+console.log('Req 20', service.listUserByAboveAverage());
 
 
