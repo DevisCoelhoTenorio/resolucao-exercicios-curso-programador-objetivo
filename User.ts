@@ -92,11 +92,29 @@ export default class User {
     return userMap;
   };
   // 15. Contar a quantidade de usuários de uma dada cidade;
-  public countUserByCity(city: string): number {
+  public countUserBySpecificCity(city: string): number {
     let count: number = 0;
     this._userList.forEach((user) => user.city === city ? count += 1 : null)
     return count;
-  }
+  };
+  // 16. Agrupar usuários pela cidade;
+  public groupByCity(): Record<string, IUser[]> {
+    const cityMap: Record<string, IUser[]> = {};
+    this._userList.forEach((user) => {
+      if(cityMap[user.city]) cityMap[user.city].push(user);
+      else cityMap[user.city] = [];
+    });
+    return cityMap;
+  };
+  // 17. Contar a quantidade de usuários por cidade;
+  public countUserByCity(): Record<string, number> {
+    const cityCountMap: Record<string, number> = {}
+    this._userList.forEach((user) => {
+      if (cityCountMap[user.city]) cityCountMap[user.city] += 1;
+      else cityCountMap[user.city] = 1;
+    });
+    return cityCountMap;
+  };
 };
 
 const service = new User();
@@ -123,6 +141,10 @@ console.log('Req 13', service.excludeYoungestFromList());
 // Req 14
 console.log('Req 14', service.listUserMapForId());
 // Req 15
-console.log('Req 15', service.countUserByCity('São Paulo'));
+console.log('Req 15', service.countUserBySpecificCity('São Paulo'));
+// Req 16
+console.log('Req 16', service.groupByCity());
+// Req 17
+console.log('Req 17', service.countUserByCity());
 
 
