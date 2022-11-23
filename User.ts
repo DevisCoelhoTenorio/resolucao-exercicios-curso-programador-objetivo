@@ -115,6 +115,25 @@ export default class User {
     });
     return cityCountMap;
   };
+  // 18. Obter a média salarial dos usuários por cidade;**
+  public  averageSalaryByCity(): Record<string, string> {
+    const averageSalaryMap: Record<string, {averageSalary: number, countUser: number}> = {}
+    this._userList.forEach((user) => {
+      if (averageSalaryMap[user.city]) {
+        averageSalaryMap[user.city].averageSalary += user.salary;
+        averageSalaryMap[user.city].countUser += 1;
+      }
+      else averageSalaryMap[user.city] = {
+       averageSalary: user.salary,
+       countUser: 1 
+      };
+    });
+    const responseObj: Record<string, string> = {}
+    Object.keys(averageSalaryMap).forEach((city) => {
+      responseObj[city] = (averageSalaryMap[city].averageSalary / averageSalaryMap[city].countUser).toFixed(2);
+    });
+    return responseObj;
+  };
 };
 
 const service = new User();
@@ -146,5 +165,7 @@ console.log('Req 15', service.countUserBySpecificCity('São Paulo'));
 console.log('Req 16', service.groupByCity());
 // Req 17
 console.log('Req 17', service.countUserByCity());
+// Req 18
+console.log('Req 18', service.averageSalaryByCity());
 
 
