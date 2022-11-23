@@ -52,12 +52,15 @@ export default class User {
   // 6. Cria uma função que recebe a lista de usuários e retorna
   // uma lista com o IMC dos respectivos usuários;
   // OBS: imc = peso/(altura x altura)
-  public listUserByImc(): Record<string, string>[] {
-    const userMap: Record<string, string>[] = this._userList.map((user) => (
-      {
-      [user.name]: (user.weight/(user.height * user.height)).toFixed(2),
-      }
+  public listUserByImc(): string[] {
+    const userMap: string[] = this._userList.map((user) => (
+       (user.weight/(user.height * user.height)).toFixed(2)
     ));
+    // const userMap: Record<string, string>[] = this._userList.map((user) => (
+    //   {
+    //   [user.name]: (user.weight/(user.height * user.height)).toFixed(2),
+    //   }
+    // ));
     return userMap;
   };
 
@@ -122,7 +125,10 @@ export default class User {
     const cityMap: Record<string, IUser[]> = {};
     this._userList.forEach((user) => {
       if(cityMap[user.city]) cityMap[user.city].push(user);
-      else cityMap[user.city] = [];
+      else {
+        cityMap[user.city] = [];
+        cityMap[user.city].push(user);
+      };
     });
     return cityMap;
   };
@@ -163,6 +169,7 @@ export default class User {
   // médio dos produtos vendidos;
   public listUserByAboveAverage(): IUser[] {
     const averagePrice = this._productService.averagePriceProducts();
+    console.log(averagePrice);
     const listUserBySpending = this._productService.listUserMapBySpending();
     const selectedUSers: IUser[] = [];
     this._userList.forEach((user) => {
@@ -232,13 +239,13 @@ const productService = new ProductService();
 const service = new User(productService);
 
 // Req 01
-// console.log('Req 01', service.findByName('antonieta francesa rainha'));
+console.log('Req 01', service.findByName('antonieta francesa rainha'));
 // // Req 02
 // console.log('Req 02', service.findUserByPropValue<number>('age', 17));
 // // Req 03
-console.log('Req 03', service.findUserByMaxSalary('f'));
+// console.log('Req 03', service.findUserByMaxSalary('f'));
 // // Req 04
-// console.log('Req 04', service.findByMaxWeightAndCity(70, 'São Paulo'));
+// console.log('Req 04', service.findByMaxWeightAndCity(69, 'São Paulo'));
 // // Req 05
 // console.log('Req 05', service.findByStateOrMarried('São Paulo'));
 // // Req 06
@@ -254,7 +261,7 @@ console.log('Req 03', service.findUserByMaxSalary('f'));
 // // Req 14
 // console.log('Req 14', service.listUserMapForId());
 // // Req 15
-// console.log('Req 15', service.countUserBySpecificCity('São Paulo'));
+// console.log('Req 15', service.countUserBySpecificCity('Rio de Janeiro'));
 // // Req 16
 // console.log('Req 16', service.groupByCity());
 // // Req 17
@@ -268,7 +275,7 @@ console.log('Req 03', service.findUserByMaxSalary('f'));
 // // Req 22
 // console.log('Req 22', service.findUserIdByBoughtLess());
 // // Req 23
-// console.log('Req 23', service.getUsersByBought()); 
+// console.log('Req 23', service.getUsersByBought());
 // // Req 24
 // console.log('Req 24', service.findSimilarUsers(newUsers));
 // // Req 25

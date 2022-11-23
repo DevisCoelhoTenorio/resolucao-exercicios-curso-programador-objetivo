@@ -11,27 +11,28 @@ export default class Product {
     this._productList = userProducts;
   };
 
-  private findUserProducts(prop: string): IProduct[] {
-    return this._productList.filter((product) => product[prop] === prop);
+  private findUserProducts(prop: string, value: string): IProduct[] {
+    const teste = this._productList.filter((product) => product[prop] === value);
+    return teste;
   };
 
   // 10. Verificar se um dado produto foi consumido
   // mais de uma vez.
   public consumedProduct(productName: string): boolean {
-    const findListProduct = this.findUserProducts(productName);
+    const findListProduct = this.findUserProducts('name', productName);
     return findListProduct.length > 1;
   };
 
   // 11. Verificar se um dado produto foi consumido
   // mais de um usuário.
   public consumedByDifferentUser(productName: string): boolean {
-    const findListProduct = this.findUserProducts(productName);
+    const findListProduct = this.findUserProducts('name', productName);
     const productMap: Record<string, number> = {};
     let check = false;
     findListProduct.forEach((product) => {
-      if (productMap[product.userId]) check = true;
-      else productMap[product.userId] = product.id;
+      if (!productMap[product.userId]) productMap[product.userId] = product.id;
     });
+    if (Object.keys(productMap).length > 1) check = true;
     return check;
   };
 
@@ -41,7 +42,7 @@ export default class Product {
     const productMap: Record<string, number> = {};
     let check = false;
     this._productList.forEach((product) => {
-      if (productMap[product.name] && productMap[product.name] ===  product.userId) check = true;
+      if (productMap[product.name] && productMap[product.name] !== product.userId) check = true;
       else productMap[product.name] = product.userId;
     });
     return check;
@@ -66,7 +67,7 @@ export default class Product {
   public averagePriceProducts(): number {
     const differentProducts = Object.values(this.getDifferentProduct());
     const averagePrice = (differentProducts
-      .reduce((acc, crr) => acc += crr.price ,0)) / differentProducts.length;
+      .reduce((acc, crr) => acc += crr.price, 0)) / differentProducts.length;
     return averagePrice;
   };
 
@@ -95,7 +96,7 @@ const service = new Product();
 // // Req 10
 // console.log('Req 10', service.consumedProduct('Uber'));
 // // Req 11
-// console.log('Req 11', service.consumedByDifferentUser('Uber'));
+// console.log('Req 11', service.consumedByDifferentUser('Computador'));
 // // Req 12
 // console.log('Req 12', service.boughtByDifferentUser());
 // //Req 19
