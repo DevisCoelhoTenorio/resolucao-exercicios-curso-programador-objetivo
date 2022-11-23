@@ -92,11 +92,11 @@ export default class Product {
 
 const service = new Product();
 
-// Req 10
-console.log('Req 10', service.consumedProduct('Uber'));
-// Req 11
-console.log('Req 11', service.consumedByDifferentUser('Uber'));
-// Req 12
-console.log('Req 12', service.boughtByDifferentUser());
-//Req 19
-console.log('Req 19', service.getDifferentNameProduct());
+// // Req 10
+// console.log('Req 10', service.consumedProduct('Uber'));
+// // Req 11
+// console.log('Req 11', service.consumedByDifferentUser('Uber'));
+// // Req 12
+// console.log('Req 12', service.boughtByDifferentUser());
+// //Req 19
+// console.log('Req 19', service.getDifferentNameProduct());
