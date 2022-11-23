@@ -1,8 +1,6 @@
 import { userProducts } from './dataBase';
 import IProduct from './interfaces/IProduct';
-import IUser from './interfaces/IUser';
 
-const PRODUCT_NOT_FOUND = 'Product not found';
 class Product {
   private _productList: IProduct[];
 
@@ -41,6 +39,14 @@ class Product {
     });
     return check;
   };
+  // 19. Obter os nomes distintos de produtos;
+  public getDifferentNameProduct(): Array<string> {
+    const nameProductMap: Record<string, number> = {};
+    this._productList.forEach((product) => {
+      if (!nameProductMap[product.name]) nameProductMap[product.name] = product.id;
+    });
+    return Object.keys(nameProductMap);
+  };
 };
 
 const service = new Product();
@@ -51,3 +57,5 @@ console.log('Req 10', service.consumedProduct('Uber'));
 console.log('Req 11', service.consumedByDifferentUser('Uber'));
 // Req 12
 console.log('Req 12', service.boughtByDifferentUser());
+//Req 19
+console.log('Req 19', service.getDifferentNameProduct());
