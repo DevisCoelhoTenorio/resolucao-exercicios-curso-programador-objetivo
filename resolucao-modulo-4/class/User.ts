@@ -52,15 +52,15 @@ export default class User {
   // 6. Cria uma função que recebe a lista de usuários e retorna
   // uma lista com o IMC dos respectivos usuários;
   // OBS: imc = peso/(altura x altura)
-  public listUserByImc(): string[] {
-    const userMap: string[] = this._userList.map((user) => (
-       (user.weight/(user.height * user.height)).toFixed(2)
-    ));
-    // const userMap: Record<string, string>[] = this._userList.map((user) => (
-    //   {
-    //   [user.name]: (user.weight/(user.height * user.height)).toFixed(2),
-    //   }
+  public listUserByImc(): Record<string, string>[] {
+    // const userMap: string[] = this._userList.map((user) => (
+    //    (user.weight/(user.height * user.height)).toFixed(2)
     // ));
+    const userMap: Record<string, string>[] = this._userList.map((user) => (
+      {
+      [user.name]: (user.weight/(user.height * user.height)).toFixed(2),
+      }
+    ));
     return userMap;
   };
 
@@ -241,42 +241,42 @@ const service = new User(productService);
 // Req 01
 console.log('Req 01', service.findByName('antonieta francesa rainha'));
 // // Req 02
-// console.log('Req 02', service.findUserByPropValue<number>('age', 17));
+console.log('Req 02', service.findUserByPropValue<number>('age', 17));
 // // Req 03
-// console.log('Req 03', service.findUserByMaxSalary('f'));
+console.log('Req 03', service.findUserByMaxSalary('f'));
 // // Req 04
-// console.log('Req 04', service.findByMaxWeightAndCity(69, 'São Paulo'));
+console.log('Req 04', service.findByMaxWeightAndCity(69, 'São Paulo'));
 // // Req 05
-// console.log('Req 05', service.findByStateOrMarried('São Paulo'));
+console.log('Req 05', service.findByStateOrMarried('São Paulo'));
 // // Req 06
-// console.log('Req 06', service.listUserByImc());
+console.log('Req 06', service.listUserByImc());
 // // Req 07
-// console.log('Req 07', service.listName());
+console.log('Req 07', service.listName());
 // // Req 08
-// console.log('Req 08', service.averageHeight());
+console.log('Req 08', service.averageHeight());
 // // Req 09
-// console.log('Req 09', service.listBelowAverageHeight());
+console.log('Req 09', service.listBelowAverageHeight());
 // // Req 13
-// console.log('Req 13', service.excludeYoungestFromList());
+console.log('Req 13', service.excludeYoungestFromList());
 // // Req 14
-// console.log('Req 14', service.listUserMapForId());
+console.log('Req 14', service.listUserMapForId());
 // // Req 15
-// console.log('Req 15', service.countUserBySpecificCity('Rio de Janeiro'));
+console.log('Req 15', service.countUserBySpecificCity('Rio de Janeiro'));
 // // Req 16
-// console.log('Req 16', service.groupByCity());
+console.log('Req 16', service.groupByCity());
 // // Req 17
-// console.log('Req 17', service.countUserByCity());
+console.log('Req 17', service.countUserByCity());
 // // Req 18
-// console.log('Req 18', service.averageSalaryByCity());
+console.log('Req 18', service.averageSalaryByCity());
 // // Req 20
-// console.log('Req 20', service.listUserByAboveAverage());
+console.log('Req 20', service.listUserByAboveAverage());
 // // Req 21
-// console.log('Req 21', service.findLeastSpentUser());
+console.log('Req 21', service.findLeastSpentUser());
 // // Req 22
-// console.log('Req 22', service.findUserIdByBoughtLess());
+console.log('Req 22', service.findUserIdByBoughtLess());
 // // Req 23
-// console.log('Req 23', service.getUsersByBought());
+console.log('Req 23', service.getUsersByBought());
 // // Req 24
-// console.log('Req 24', service.findSimilarUsers(newUsers));
+console.log('Req 24', service.findSimilarUsers(newUsers));
 // // Req 25
-// console.log('Req 25', service.findNoSimilarUsers(newUsers));
+console.log('Req 25', service.findNoSimilarUsers(newUsers));
