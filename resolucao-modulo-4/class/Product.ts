@@ -1,8 +1,9 @@
 import { userProducts } from '../data/dataBase';
 import IProduct from '../interfaces/IProduct';
 
-// Obs: Para rodar os Logs de teste basta digitar o comando
+// Obs: Para rodar os Logs basta digitar o comando
 // ts-node ./resolucao-modulo-4/class/Product.ts na raiz do projeto.
+// Para rodar todos os testes basta usar o comando npm test.
 
 export default class Product {
   private _productList: IProduct[];
@@ -11,27 +12,28 @@ export default class Product {
     this._productList = userProducts;
   };
 
-  private findUserProducts(prop: string): IProduct[] {
-    return this._productList.filter((product) => product[prop] === prop);
+  private findUserProducts(prop: string, value: string): IProduct[] {
+    const teste = this._productList.filter((product) => product[prop] === value);
+    return teste;
   };
 
   // 10. Verificar se um dado produto foi consumido
   // mais de uma vez.
   public consumedProduct(productName: string): boolean {
-    const findListProduct = this.findUserProducts(productName);
+    const findListProduct = this.findUserProducts('name', productName);
     return findListProduct.length > 1;
   };
 
   // 11. Verificar se um dado produto foi consumido
   // mais de um usuário.
   public consumedByDifferentUser(productName: string): boolean {
-    const findListProduct = this.findUserProducts(productName);
+    const findListProduct = this.findUserProducts('name', productName);
     const productMap: Record<string, number> = {};
     let check = false;
     findListProduct.forEach((product) => {
-      if (productMap[product.userId]) check = true;
-      else productMap[product.userId] = product.id;
+      if (!productMap[product.userId]) productMap[product.userId] = product.id;
     });
+    if (Object.keys(productMap).length > 1) check = true;
     return check;
   };
 
@@ -41,7 +43,7 @@ export default class Product {
     const productMap: Record<string, number> = {};
     let check = false;
     this._productList.forEach((product) => {
-      if (productMap[product.name] && productMap[product.name] ===  product.userId) check = true;
+      if (productMap[product.name] && productMap[product.name] !== product.userId) check = true;
       else productMap[product.name] = product.userId;
     });
     return check;
@@ -64,9 +66,10 @@ export default class Product {
 
   // Método auxiliar do Req 20;
   public averagePriceProducts(): number {
-    const differentProducts = Object.values(this.getDifferentProduct());
-    const averagePrice = (differentProducts
-      .reduce((acc, crr) => acc += crr.price ,0)) / differentProducts.length;
+    const averagePrice = (this._productList
+      .reduce((acc, crr) => acc += crr.price, 0)) / this._productList.length;
+      console.log(averagePrice);
+      
     return averagePrice;
   };
 
@@ -92,11 +95,11 @@ export default class Product {
 
 const service = new Product();
 
-// Req 10
-console.log('Req 10', service.consumedProduct('Uber'));
-// Req 11
-console.log('Req 11', service.consumedByDifferentUser('Uber'));
-// Req 12
-console.log('Req 12', service.boughtByDifferentUser());
-//Req 19
-console.log('Req 19', service.getDifferentNameProduct());
+// // Req 10
+// console.log('Req 10', service.consumedProduct('Uber'));
+// // Req 11
+// console.log('Req 11', service.consumedByDifferentUser('Uber'));
+// // Req 12
+// console.log('Req 12', service.boughtByDifferentUser());
+// // Req 19
+// console.log('Req 19', service.getDifferentNameProduct());
