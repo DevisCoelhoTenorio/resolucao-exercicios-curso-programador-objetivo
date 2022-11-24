@@ -1,8 +1,9 @@
 import { userProducts } from '../data/dataBase';
 import IProduct from '../interfaces/IProduct';
 
-// Obs: Para rodar os Logs de teste basta digitar o comando
+// Obs: Para rodar os Logs basta digitar o comando
 // ts-node ./resolucao-modulo-4/class/Product.ts na raiz do projeto.
+// Para rodar todos os testes basta usar o comando npm test.
 
 export default class Product {
   private _productList: IProduct[];

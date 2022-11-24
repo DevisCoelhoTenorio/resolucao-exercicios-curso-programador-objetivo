@@ -4,6 +4,7 @@ import ProductService from './Product';
 
 // Obs: Para rodar os Logs de teste basta digitar o comando
 // ts-node ./resolucao-modulo-4/class/User.ts na raiz do projeto.
+// Para rodar todos os testes basta usar o comando npm test.
 
 const USER_NOT_FOUND = 'User not found';
 export default class User {
