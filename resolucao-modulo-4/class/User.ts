@@ -169,8 +169,8 @@ export default class User {
   // médio dos produtos vendidos;
   public listUserByAboveAverage(): IUser[] {
     const averagePrice = this._productService.averagePriceProducts();
-    console.log(averagePrice);
     const listUserBySpending = this._productService.listUserMapBySpending();
+    
     const selectedUSers: IUser[] = [];
     this._userList.forEach((user) => {
       if (listUserBySpending[user.id] && listUserBySpending[user.id] > averagePrice) {
@@ -238,45 +238,45 @@ export default class User {
 const productService = new ProductService();
 const service = new User(productService);
 
-// Req 01
-console.log('Req 01', service.findByName('antonieta francesa rainha'));
-// // Req 02
-console.log('Req 02', service.findUserByPropValue<number>('age', 17));
-// // Req 03
-console.log('Req 03', service.findUserByMaxSalary('f'));
-// // Req 04
-console.log('Req 04', service.findByMaxWeightAndCity(69, 'São Paulo'));
-// // Req 05
-console.log('Req 05', service.findByStateOrMarried('São Paulo'));
-// // Req 06
-console.log('Req 06', service.listUserByImc());
-// // Req 07
-console.log('Req 07', service.listName());
-// // Req 08
-console.log('Req 08', service.averageHeight());
-// // Req 09
-console.log('Req 09', service.listBelowAverageHeight());
-// // Req 13
-console.log('Req 13', service.excludeYoungestFromList());
-// // Req 14
-console.log('Req 14', service.listUserMapForId());
-// // Req 15
-console.log('Req 15', service.countUserBySpecificCity('Rio de Janeiro'));
-// // Req 16
-console.log('Req 16', service.groupByCity());
-// // Req 17
-console.log('Req 17', service.countUserByCity());
-// // Req 18
-console.log('Req 18', service.averageSalaryByCity());
-// // Req 20
-console.log('Req 20', service.listUserByAboveAverage());
-// // Req 21
-console.log('Req 21', service.findLeastSpentUser());
-// // Req 22
-console.log('Req 22', service.findUserIdByBoughtLess());
-// // Req 23
-console.log('Req 23', service.getUsersByBought());
-// // Req 24
-console.log('Req 24', service.findSimilarUsers(newUsers));
-// // Req 25
-console.log('Req 25', service.findNoSimilarUsers(newUsers));
+// // Req 01
+// console.log('Req 01', service.findByName('maria clementina correia'));
+// // // Req 02
+// console.log('Req 02', service.findUserByPropValue<number>('age', 17));
+// // // Req 03
+// console.log('Req 03', service.findUserByMaxSalary('f'));
+// // // Req 04
+// console.log('Req 04', service.findByMaxWeightAndCity(70, 'São Paulo'));
+// // // Req 05
+// console.log('Req 05', service.findByStateOrMarried('São Paulo'));
+// // // Req 06
+// console.log('Req 06', service.listUserByImc());
+// // // Req 07
+// console.log('Req 07', service.listName());
+// // // Req 08
+// console.log('Req 08', service.averageHeight());
+// // // Req 09
+// console.log('Req 09', service.listBelowAverageHeight());
+// // // Req 13
+// console.log('Req 13', service.excludeYoungestFromList());
+// // // Req 14
+// console.log('Req 14', service.listUserMapForId());
+// // // Req 15
+// console.log('Req 15', service.countUserBySpecificCity('Rio de Janeiro'));
+// // // Req 16
+// console.log('Req 16', service.groupByCity());
+// // // Req 17
+// console.log('Req 17', service.countUserByCity());
+// // // Req 18
+// console.log('Req 18', service.averageSalaryByCity());
+// // // Req 20
+// console.log('Req 20', service.listUserByAboveAverage());
+// // // Req 21
+// console.log('Req 21', service.findLeastSpentUser());
+// // // Req 22
+// console.log('Req 22', service.findUserIdByBoughtLess());
+// // // Req 23
+// console.log('Req 23', service.getUsersByBought());
+// // // Req 24
+// console.log('Req 24', service.findSimilarUsers(newUsers));
+// // // Req 25
+// console.log('Req 25', service.findNoSimilarUsers(newUsers));

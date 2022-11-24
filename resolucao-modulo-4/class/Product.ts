@@ -65,9 +65,10 @@ export default class Product {
 
   // Método auxiliar do Req 20;
   public averagePriceProducts(): number {
-    const differentProducts = Object.values(this.getDifferentProduct());
-    const averagePrice = (differentProducts
-      .reduce((acc, crr) => acc += crr.price, 0)) / differentProducts.length;
+    const averagePrice = (this._productList
+      .reduce((acc, crr) => acc += crr.price, 0)) / this._productList.length;
+      console.log(averagePrice);
+      
     return averagePrice;
   };
 
@@ -94,10 +95,10 @@ export default class Product {
 const service = new Product();
 
 // // Req 10
-console.log('Req 10', service.consumedProduct('Uber'));
+// console.log('Req 10', service.consumedProduct('Uber'));
 // // Req 11
-console.log('Req 11', service.consumedByDifferentUser('Computador'));
+// console.log('Req 11', service.consumedByDifferentUser('Uber'));
 // // Req 12
-console.log('Req 12', service.boughtByDifferentUser());
-// //Req 19
-console.log('Req 19', service.getDifferentNameProduct());
+// console.log('Req 12', service.boughtByDifferentUser());
+// // Req 19
+// console.log('Req 19', service.getDifferentNameProduct());
